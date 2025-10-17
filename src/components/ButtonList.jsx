@@ -17,7 +17,7 @@ function ButtonList() {
   ];
 
   return (
-    <div className="flex overflow-x-auto whitespace-nowrap no-scrollbar p-2 bg-white">
+    <div className="flex mt-20 overflow-x-auto whitespace-nowrap no-scrollbar p-2 bg-white">
       {categories.map((name, index) => (
         <Button key={index} name={name} />
       ))}

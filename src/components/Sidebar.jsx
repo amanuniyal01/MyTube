@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import {
     Home,
     Flame,
@@ -16,14 +17,14 @@ const Sidebar = () => {
 
 
     return !isMenuOpen ? null : (
-        <div className="bg-white h-[100vh] w-[15vw] p-4 shadow-md">
+        <div className="z-30 mt-20 bg-white h-[100vh] transition-all  w-[15vw] p-4 shadow-md">
 
             {/* Top Section */}
             <ul className="list-none flex flex-col gap-4 font-semibold text-gray-700">
-                <li className="flex items-center gap-3 hover:bg-gray-100 p-2 rounded-lg cursor-pointer">
+                <Link to="/"> <li className="flex items-center gap-3 hover:bg-gray-100 p-2 rounded-lg cursor-pointer">
                     <Home className="h-6 w-6 text-gray-700" />
                     <span>Home</span>
-                </li>
+                </li></Link>
                 <li className="flex items-center gap-3 hover:bg-gray-100 p-2 rounded-lg cursor-pointer">
                     <Flame className="h-6 w-6 text-gray-700" />
                     <span>Shorts</span>
