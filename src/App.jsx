@@ -3,23 +3,25 @@ import Header from './components/Header'
 import Body from './components/Body'
 import { Provider } from 'react-redux'
 import store from './utils/store'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom'
 import MainContainer from './components/MainContainer'
 import WatchPage from './components/WatchPage'
 
-function App() {
-
+const App=() => {
   const appRouter = createBrowserRouter([
-
     {
-
       path: "/",
-      element: <Body />,
+      element: (
+        <>
+        
+          <Header />
+          <Body />
+        </>
+      ),
       children: [
         {
           path: "/",
           element: <MainContainer />
-
         },
         {
           path: "/watch",
@@ -28,16 +30,12 @@ function App() {
       ]
     }
   ])
+
   return (
     <Provider store={store}>
-      <div className="relative">
-        <Header/>
-      
-        <RouterProvider router={appRouter} />
-      </div>
+      <RouterProvider router={appRouter} />
     </Provider>
   )
-
 }
 
 export default App

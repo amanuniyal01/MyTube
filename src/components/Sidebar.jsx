@@ -10,28 +10,30 @@ import {
     ThumbsUp
 } from "lucide-react";
 import { useSelector } from "react-redux";
+import language from "../utils/language";
 
 const Sidebar = () => {
 
+    const langKey = useSelector((store) => store.config.lang)
     const isMenuOpen = useSelector(store => store.app.isMenuOpen);
 
 
     return !isMenuOpen ? null : (
         <div className="z-30 mt-20 bg-white h-[100vh] transition-all  w-[15vw] p-4 shadow-md">
 
-            {/* Top Section */}
             <ul className="list-none flex flex-col gap-4 font-semibold text-gray-700">
                 <Link to="/"> <li className="flex items-center gap-3 hover:bg-gray-100 p-2 rounded-lg cursor-pointer">
                     <Home className="h-6 w-6 text-gray-700" />
-                    <span>Home</span>
+                    <span>{language[langKey].Home
+                    }</span>
                 </li></Link>
                 <li className="flex items-center gap-3 hover:bg-gray-100 p-2 rounded-lg cursor-pointer">
                     <Flame className="h-6 w-6 text-gray-700" />
-                    <span>Shorts</span>
+                    <span>{language[langKey].Shorts}</span>
                 </li>
                 <li className="flex items-center gap-3 hover:bg-gray-100 p-2 rounded-lg cursor-pointer">
                     <PlaySquare className="h-6 w-6 text-gray-700" />
-                    <span>Subscriptions</span>
+                    <span>{language[langKey].Subscriptions}</span>
                 </li>
             </ul>
 
@@ -41,23 +43,23 @@ const Sidebar = () => {
             <ul className="list-none flex flex-col gap-4 font-semibold text-gray-700">
                 <li className="flex items-center gap-3 hover:bg-gray-100 p-2 rounded-lg cursor-pointer">
                     <History className="h-6 w-6 text-gray-700" />
-                    <span>History</span>
+                    <span>{language[langKey].History}</span>
                 </li>
                 <li className="flex items-center gap-3 hover:bg-gray-100 p-2 rounded-lg cursor-pointer">
                     <Video className="h-6 w-6 text-gray-700" />
-                    <span>Your Videos</span>
+                    <span>{language[langKey].YourVideos}</span>
                 </li>
                 <li className="flex items-center gap-3 hover:bg-gray-100 p-2 rounded-lg cursor-pointer">
                     <Clock className="h-6 w-6 text-gray-700" />
-                    <span>Watch Later</span>
+                    <span>{language[langKey].watchLater}</span>
                 </li>
                 <li className="flex items-center gap-3 hover:bg-gray-100 p-2 rounded-lg cursor-pointer">
                     <ThumbsUp className="h-6 w-6 text-gray-700" />
-                    <span>Liked Videos</span>
+                    <span>{language[langKey].likedVideos}</span>
                 </li>
                 <li className="flex items-center gap-3 hover:bg-gray-100 p-2 rounded-lg cursor-pointer">
                     <ListVideo className="h-6 w-6 text-gray-700" />
-                    <span>Playlists</span>
+                    <span>{language[langKey].playlists}</span>
                 </li>
             </ul>
         </div>

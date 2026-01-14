@@ -16,16 +16,16 @@ function VideoCard({ info }) {
           src={thumbnails?.medium?.url}
           alt={title}
         />
-        {/* subtle overlay on hover */}
+        
         <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
       </div>
 
       <div className="p-3">
-        <h3 className="text-sm font-semibold line-clamp-2 group-hover:text-red-500 transition-colors duration-300">
+        <h3 className="text-sm font-semibold line-clamp-2 group-hover:text-red-500 transition-colors text-white duration-300">
           {title}
         </h3>
-        <p className="text-gray-500 text-xs mt-1">{channelTitle}</p>
-        <p className="text-gray-400 text-xs mt-1">
+        <p className="text-white text-xs mt-1">{channelTitle}</p>
+        <p className="text-white text-xs mt-1">
           {Number(statistics?.viewCount).toLocaleString()} views
         </p>
       </div>
