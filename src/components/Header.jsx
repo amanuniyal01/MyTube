@@ -69,7 +69,7 @@ function Header() {
 
 
     return (
-        <div className="fixed top-0 left-0 w-full z-50 flex justify-between items-center shadow-md px-4 py-2 bg-white">
+        <div className="fixed top-0 left-0 w-full z-50 flex justify-between items-center shadow-lg px-4 py-2 bg-white">
 
             <div className="flex items-center gap-4">
                 <Menu onClick={toggleMenuHandler} className="h-6 w-6 cursor-pointer" />
@@ -86,7 +86,7 @@ function Header() {
 
             <div className="relative flex items-center w-1/2">
                 <input
-                    className="font-[600] flex-grow border border-gray-300 rounded-l-full px-6 py-2 outline-none text-gray-800"
+                    className="font-[600] flex-grow border-2 border-gray-300 rounded-l-full px-6 py-2 outline-none text-gray-800"
                     type="text"
                     placeholder={language[langKey].search}
                     value={searchQuery}
@@ -119,21 +119,22 @@ function Header() {
                 </div>)}
 
             </div>
-            <div>
+            <div className="relative">
                 <select
                     value={langKey}
-                    onChange={handleLanguageChange}
-                    className="border p-1 rounded"
-                >
+                    onChange={(e) => dispatch(changeLanguage(e.target.value))}
+                    className="  appearance-none  cursor-pointer  rounded-full  border border-gray-300  bg-white  px-4 py-1.5 pr-8  text-sm font-medium text-gray-800  hover:bg-gray-100  focus:outline-none focus:ring-2 focus:ring-gray-300"        >
                     {LANGUAGE_OPTION.map((lang) => (
-                        <option key={lang.identifier} value={lang.identifier}>
+                        <option className="rounded-lg" key={lang.identifier} value={lang.identifier}>
                             {lang.name}
                         </option>
                     ))}
                 </select>
 
+                <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 text-xs">
+                    ▼
+                </span>
             </div>
-
             {/* Right Section */}
             <div className="flex items-center gap-4">
                 <Bell className="h-6 w-6 cursor-pointer" />
