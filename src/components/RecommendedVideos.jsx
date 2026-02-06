@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 import VideoCard from "./VideoCard";
-import { GOOGLE_API } from "../utils/constant";
+import { YOUTUBE_API } from "../utils/constant";
 import { Link } from "react-router-dom";
 
 
-const RecommendedVideos = () => {
+const RecommendedVideos = ({videoId}) => {
     const [videos, setVideos] = useState([]);
-    
-
 
     useEffect(() => {
         fetchRecommended();
@@ -16,8 +14,8 @@ const RecommendedVideos = () => {
     const fetchRecommended = async () => {
         try {
             const res = await fetch(
-                `https://youtube.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=20&regionCode=IN&key=${GOOGLE_API}`
-            );
+                YOUTUBE_API
+            )
 
             const data = await res.json();
 
@@ -35,7 +33,7 @@ const RecommendedVideos = () => {
         <div className="space-y-2">
             {videos.map((video) => (
                 <Link key={video.id} to={`/watch?v=${video.id}`}>
-                    <VideoCard info={video} />
+                    <VideoCard  info={video}  />
                 </Link>
             ))}
         </div>
