@@ -5,7 +5,7 @@ const MainContainer = () => {
     return (
         <div className=" h-[100vh] w-[100vw] -ml-5">
             <ButtonList />
-            <VideoContainer />
+            <VideoContainer  />
 
         </div> 
     )

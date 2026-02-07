@@ -8,13 +8,14 @@ import MainContainer from './components/MainContainer'
 import WatchPage from './components/WatchPage'
 
 const App=() => {
+  
   const appRouter = createBrowserRouter([
     {
       path: "/",
       element: (
         <>
         
-          <Header />
+          <Header  />
           <Body />
         </>
       ),
