@@ -20,7 +20,7 @@ const Sidebar = () => {
 
     return !isMenuOpen ? null : (
         <div
-            className=" z-30 mt-10 md:mt-20 bg-white shadow-md transition-all h-full w-64 md:w-[15vw] min-w-[220px] p-3 md:p-4 fixed md:relative  left-0 top-0  overflow-y-auto"       >
+            className=" z-30 md:mt-20 bg-white shadow-md transition-all h-full w-64 md:w-[15vw] min-w-[220px] p-3 md:p-4 fixed   left-0 top-0  overflow-y-auto"       >
 
             <ul className="list-none flex flex-col gap-3 md:gap-4 font-semibold text-gray-700 text-sm md:text-base">
 

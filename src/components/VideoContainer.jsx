@@ -27,7 +27,7 @@ function VideoContainer() {
   }
 
   return (
-    <div className={`flex  flex-wrap justify-center gap-6 ${isMenuOpen ? "md:-ml-10" : "md:ml-50"} mt-16 px-6`}>
+    <div className={`flex  flex-wrap justify-center gap-6 ${isMenuOpen ? "md:ml-60" : "md:ml-20"} mt-16 px-6`}>
       {videos?.map((video) => (
         <Link key={video.id} to={`/watch?v=${video.id}`}>
           <VideoCard info={video} />

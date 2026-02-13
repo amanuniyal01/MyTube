@@ -14,7 +14,7 @@ function VideoCard({ info }) {
     >
       <div className="relative">
         <img
-          className={`w-full rounded-xl ${isMenuOpen ? "h-44" : "h-46"} object-cover`}
+          className={`w-full rounded-xl ${isMenuOpen ? "h-44" : "h-58"} object-cover`}
           src={thumbnails?.medium?.url}
           alt={title}
         />
