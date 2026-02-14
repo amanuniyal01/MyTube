@@ -3,7 +3,7 @@ export const YOUTUBE_API = "https://youtube.googleapis.com/youtube/v3/videos?par
 export const RECOMMENDED_API =
     "https://youtube.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=10&relatedToVideoId=";
 
-export const YOUTUBE_SEARCH_API = "https://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=";
+export const YOUTUBE_SEARCH_API = "https://suggestqueries.google.com/complete/search?client=firefox&q=";
 export const LANGUAGE_OPTION = [
     { identifier: "en", name: "English" },
     { identifier: "hindi", name: "Hindi" }

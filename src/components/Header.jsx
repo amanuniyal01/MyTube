@@ -45,22 +45,13 @@ function Header() {
         }
 
         try {
-            const response = await fetch(
-                `https://api.allorigins.win/get?url=${encodeURIComponent(
-                    YOUTUBE_SEARCH_API + searchQuery
-                )}`
-            );
-
+            const response = await fetch("http://localhost:3000/api/suggest?q=" + searchQuery)
             const data = await response.json();
-            const parsed = JSON.parse(data.contents);
-            console.log(parsed);
-            setSuggestions(parsed[1]);
+            console.log(data[1])
         } catch (err) {
             console.error("Error fetching search suggestions:", err);
         }
-        dispatch(cacheResults({
-            [searchQuery]: json[1]
-        }))
+
     };
     const handleLanguageChange = (e) => {
         dispatch(changeLanguage(e.target.value))
@@ -143,7 +134,7 @@ function Header() {
                     ))}
                 </select>
 
-                
+
             </div>
 
 
