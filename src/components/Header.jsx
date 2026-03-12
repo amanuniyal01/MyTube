@@ -18,6 +18,10 @@ function Header() {
 
     const dispatch = useDispatch();
 
+    const handleSearch = () => {
+        console.log(searchQuery)
+
+    }
     const toggleMenuHandler = () => {
         setTimeout(() => {
             dispatch(toggleMenu());
@@ -39,7 +43,7 @@ function Header() {
             } else {
                 getSearchSuggestions();
             }
-        }, 300);
+        }, 200);
 
         return () => clearTimeout(timer);
     }, [searchQuery]);
@@ -94,10 +98,12 @@ function Header() {
                     onChange={(e) => setSearchQuery(e.target.value)}
                     onFocus={() => setShowSuggestions(true)}
                     onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
+
                 />
 
-                <button className="px-2 md:px-4 py-1.5 md:py-2 bg-gray-100 border border-gray-300 rounded-r-full hover:bg-gray-200">
-                    <Search className="h-4 w-4 md:h-6 md:w-5" />
+                <button
+                    onClick={handleSearch} className="px-2 md:px-4 py-1.5 md:py-2 bg-gray-100 border border-gray-300 rounded-r-full hover:bg-gray-200">
+                    <Search className="h-6 w-4 md:h-6 md:w-5" />
                 </button>
 
                 <button className="ml-2 md:ml-3 p-1.5 md:p-2 bg-gray-100 rounded-full hover:bg-gray-200">
