@@ -17,16 +17,20 @@ function Header() {
     const langKey = useSelector((store) => store.config.lang);
 
     const dispatch = useDispatch();
-    const navigate=useNavigate();
+    const navigate = useNavigate();
 
     const handleSearch = () => {
         if (!searchQuery.trim()) return;
 
         navigate("/results?q=" + searchQuery);
-        setSearchQuery("")
-        
+        setSearchQuery("");
+    };
 
-    }
+    const handleKeyDown = (e) => {
+        if (e.key === "Enter") {
+            handleSearch();
+        }
+    };
     const toggleMenuHandler = () => {
         setTimeout(() => {
             dispatch(toggleMenu());
@@ -103,6 +107,7 @@ function Header() {
                     onChange={(e) => setSearchQuery(e.target.value)}
                     onFocus={() => setShowSuggestions(true)}
                     onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
+                    onKeyDown={handleKeyDown}
 
                 />
 
