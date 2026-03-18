@@ -3,7 +3,7 @@ import { Menu, Search, Mic, Bell } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../utils/appSlice";
 import { cacheResults } from "../utils/SearchSlice";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { LANGUAGE_OPTION } from "../utils/constant";
 import { changeLanguage } from "../utils/configSlice";
 import language from "../utils/language";
@@ -17,9 +17,14 @@ function Header() {
     const langKey = useSelector((store) => store.config.lang);
 
     const dispatch = useDispatch();
+    const navigate=useNavigate();
 
     const handleSearch = () => {
-        console.log(searchQuery)
+        if (!searchQuery.trim()) return;
+
+        navigate("/results?q=" + searchQuery);
+        setSearchQuery("")
+        
 
     }
     const toggleMenuHandler = () => {
