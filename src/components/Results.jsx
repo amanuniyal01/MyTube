@@ -29,7 +29,7 @@ function Results() {
             fetchVideos()
         }
     }, [query])
-    if (!videos) return <h1>"Loading"</h1>
+   
     return (
         <div className={isMenuOpen ? "ml-65" : "ml-50"}>
 
