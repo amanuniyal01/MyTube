@@ -31,7 +31,7 @@ function Results() {
     }, [query])
    
     return (
-        <div className={isMenuOpen ? "ml-65" : "ml-50"}>
+        <div className={isMenuOpen ? "md:ml-65" : "ml-5 md:ml-50"}>
 
             <div className='mt-20'>
 
