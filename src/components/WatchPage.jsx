@@ -4,6 +4,7 @@ import { closeMenu } from "../utils/appSlice";
 import { useSearchParams } from "react-router-dom";
 import RecommendedVideos from "./RecommendedVideos";
 import CommentsContainer from "./CommentsContainer";
+import LiveChat from "./LiveChat";
 
 function WatchPage() {
   const [searchParams] = useSearchParams();
@@ -16,8 +17,7 @@ function WatchPage() {
   }, [dispatch]);
 
   return (
-    <div className="grid grid-cols-12 mt-28 px-3 md:px-8 gap-6">
-
+    <div className="grid w-full grid-cols-12 mt-28 px-3 md:px-8 gap-6">
 
       <div className="col-span-12 md:col-span-9">
         <iframe
@@ -27,16 +27,13 @@ function WatchPage() {
           frameBorder="0"
           allowFullScreen
         />
-        <div> 
-           <CommentsContainer />
-           </div>
+        <CommentsContainer />
       </div>
 
-
-      <div className="col-span-1">
+      <div className="col-span-12 md:col-span-3 w-full flex flex-col gap-4">
+        <LiveChat />
         <RecommendedVideos videoId={videoId} />
       </div>
-      
 
     </div>
   );
