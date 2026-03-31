@@ -2,8 +2,9 @@ import { configureStore } from "@reduxjs/toolkit";
 import appSlice from "./appSlice"
 import SearchSlice from "./SearchSlice"
 import configReducer from "./configSlice";
-import VideoReducer from "./VideoSlice"
-import ChatSlice from "./ChatSlice"
+import VideoReducer from "./VideoSlice";
+import ChatSlice from "./ChatSlice";
+import userReducer from "./UserSlice";
 const store = configureStore({
     reducer: {
         app: appSlice,
@@ -11,6 +12,7 @@ const store = configureStore({
         config: configReducer,
         videos: VideoReducer,
         chat: ChatSlice,
+        user: userReducer,
     }
 
 })
