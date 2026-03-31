@@ -7,6 +7,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { LANGUAGE_OPTION } from "../utils/constant";
 import { changeLanguage } from "../utils/configSlice";
 import language from "../utils/language";
+import { auth } from "../utils/firebase"; // 👈 new
+import { signOut } from "firebase/auth"; // 👈 new
+import { clearUser } from "../utils/userSlice"; // 👈 new
 
 function Header() {
     const [searchQuery, setSearchQuery] = useState("");
@@ -15,13 +18,13 @@ function Header() {
 
     const searchCache = useSelector((store) => store.search);
     const langKey = useSelector((store) => store.config.lang);
+    const user = useSelector((store) => store.user); // 👈 new
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const handleSearch = () => {
         if (!searchQuery.trim()) return;
-
         navigate("/results?q=" + searchQuery);
         setSearchQuery("");
     };
@@ -31,14 +34,12 @@ function Header() {
             handleSearch();
         }
     };
+
     const toggleMenuHandler = () => {
         setTimeout(() => {
             dispatch(toggleMenu());
         }, 300)
-
-
     };
-
 
     useEffect(() => {
         if (!searchQuery) {
@@ -57,21 +58,14 @@ function Header() {
         return () => clearTimeout(timer);
     }, [searchQuery]);
 
-
     const getSearchSuggestions = async () => {
         try {
             const response = await fetch(
                 "http://localhost:3000/api/suggest?q=" + searchQuery
             );
-
             const data = await response.json();
-
             setSuggestions(data[1]);
-            dispatch(
-                cacheResults({
-                    [searchQuery]: data[1],
-                })
-            );
+            dispatch(cacheResults({ [searchQuery]: data[1] }));
         } catch (err) {
             console.error("Suggestion fetch error:", err);
         }
@@ -86,7 +80,6 @@ function Header() {
                     onClick={toggleMenuHandler}
                     className="h-5 w-5 md:h-6 md:w-6 cursor-pointer"
                 />
-
                 <Link to="/">
                     <img
                         className="h-6 md:h-10"
@@ -98,7 +91,6 @@ function Header() {
 
             {/* SEARCH */}
             <div className="relative flex items-center flex-1 mx-2 md:mx-6 max-w-[600px]">
-
                 <input
                     className="w-full border-2 border-gray-300 rounded-l-full px-3 md:px-6 py-1.5 md:py-2 outline-none text-gray-800 text-sm md:text-base"
                     type="text"
@@ -108,14 +100,12 @@ function Header() {
                     onFocus={() => setShowSuggestions(true)}
                     onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
                     onKeyDown={handleKeyDown}
-
                 />
-
                 <button
-                    onClick={handleSearch} className="px-2 md:px-4 py-1.5 md:py-2 bg-gray-100 border border-gray-300 rounded-r-full hover:bg-gray-200">
+                    onClick={handleSearch}
+                    className="px-2 md:px-4 py-1.5 md:py-2 bg-gray-100 border border-gray-300 rounded-r-full hover:bg-gray-200">
                     <Search className="h-6 w-4 md:h-6 md:w-5" />
                 </button>
-
                 <button className="ml-2 md:ml-3 p-1.5 md:p-2 bg-gray-100 rounded-full hover:bg-gray-200">
                     <Mic className="h-4 w-4 md:h-5 md:w-5" />
                 </button>
@@ -123,7 +113,6 @@ function Header() {
                 {/* Suggestions */}
                 {showSuggestions && (
                     <div className="absolute top-12 left-0 w-full bg-white rounded-xl shadow-lg border border-gray-200 px-3 md:px-5 py-0 z-50 max-h-72 overflow-y-auto">
-
                         <ul className="space-y-2">
                             {suggestions.map((s, i) => (
                                 <li
@@ -136,7 +125,6 @@ function Header() {
                                 </li>
                             ))}
                         </ul>
-
                     </div>
                 )}
             </div>
@@ -159,11 +147,32 @@ function Header() {
             {/* RIGHT */}
             <div className="flex items-center gap-2 md:gap-4 flex-shrink-0">
                 <Bell className="h-5 w-5 md:h-6 md:w-6 cursor-pointer" />
-                <img
-                    className="h-7 w-7 md:h-8 md:w-8 rounded-full cursor-pointer"
-                    alt="User"
-                    src="https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png"
-                />
+
+                
+                {user ? (
+                    <div className="relative group">
+                        {/* First letter avatar */}
+                        <div className="h-8 w-8 rounded-full bg-purple-600 text-white flex items-center justify-center font-bold cursor-pointer text-sm">
+                            {user.name?.charAt(0).toUpperCase()}
+                        </div>
+                        {/* Hover dropdown */}
+                        <div className="absolute right-0 top-10 hidden group-hover:block bg-white shadow-lg rounded-xl p-3 w-36 z-50 border border-gray-100">
+                            <p className="text-sm font-medium text-gray-800 mb-2">{user.name}</p>
+                            <button
+                                onClick={() => { signOut(auth); dispatch(clearUser()); }}
+                                className="text-xs text-red-500 hover:text-red-700"
+                            >
+                                Sign Out
+                            </button>
+                        </div>
+                    </div>
+                ) : (
+                    <Link to="/login">
+                        <button className="px-3 py-1.5 bg-purple-600 text-white rounded-full text-xs font-medium hover:bg-purple-700">
+                            Sign In
+                        </button>
+                    </Link>
+                )}
             </div>
         </div>
     );
