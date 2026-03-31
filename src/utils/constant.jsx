@@ -9,5 +9,6 @@ export const LANGUAGE_OPTION = [
     { identifier: "hindi", name: "Hindi" }
 
 ]
+export const OFFSET_LIVE_CHAT=10
 export const YOUTUBE_SEARCH_RESULTS_API =
   "https://youtube.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=20&q=";
