@@ -19,12 +19,10 @@ function Login() {
     setError("");
     try {
       if (isSignUp) {
-        // Sign Up
         const res = await createUserWithEmailAndPassword(auth, email, password);
         await updateProfile(res.user, { displayName: name });
         dispatch(setUser({ name, email }));
       } else {
-        // Sign In
         const res = await signInWithEmailAndPassword(auth, email, password);
         dispatch(setUser({ name: res.user.displayName, email: res.user.email }));
       }
@@ -35,52 +33,105 @@ function Login() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-sm">
-        <h2 className="text-2xl font-bold text-gray-800 mb-6">
-          {isSignUp ? "Sign Up" : "Sign In"}
-        </h2>
+    <div className="flex min-h-screen bg-black">
 
-        {isSignUp && (
-          <input
-            type="text"
-            placeholder="Full Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="w-full border border-gray-300 rounded-lg px-4 py-2 mb-3 outline-none focus:border-purple-400"
+      {/* LEFT — background image panel, visible only on large screens */}
+      <div
+        className="hidden lg:flex flex-col justify-end w-1/2 bg-cover bg-center p-12"
+        style={{
+          backgroundImage: `url('https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=1200&auto=format&fit=crop&q=80')`,
+        }}
+      >
+        {/* Semi-transparent dark box sitting on top of the image */}
+        <div className="bg-black bg-opacity-60 rounded-2xl p-6 max-w-sm">
+          <p className="text-white text-2xl font-bold mb-2">Millions of videos.</p>
+          <p className="text-gray-300 text-sm">Watch, share, and create — all in one place.</p>
+        </div>
+      </div>
+
+      {/* RIGHT — form panel with dark background */}
+      <div className="flex flex-1 flex-col items-center justify-center bg-neutral-950 px-6 py-12">
+
+        {/* YouTube logo — inverted to white */}
+        <div className="mb-10">
+          <img
+            className="h-6 brightness-0 invert"
+            alt="YouTube Logo"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgsKZUi9opgiAngq8jEISpzkg5CQCvKPajVn9ZxqcI1ImQE2jU89M5lHTbUEv05ZP0_ns&usqp=CAU"
           />
-        )}
+        </div>
 
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="w-full border border-gray-300 rounded-lg px-4 py-2 mb-3 outline-none focus:border-purple-400"
-        />
+        {/* Form card */}
+        <div className="w-full max-w-sm bg-neutral-900 border border-neutral-800 rounded-2xl px-8 py-8">
 
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="w-full border border-gray-300 rounded-lg px-4 py-2 mb-3 outline-none focus:border-purple-400"
-        />
+          <h2 className="text-xl font-bold text-white mb-1">
+            {isSignUp ? "Create account" : "Sign in"}
+          </h2>
+          <p className="text-gray-400 text-sm mb-6">
+            {isSignUp ? "Join YouTube today" : "to continue to YouTube"}
+          </p>
 
-        {error && <p className="text-red-500 text-xs mb-3">{error}</p>}
+          {isSignUp && (
+            <div className="mb-4">
+              <label className="block text-xs text-gray-400 mb-1">Full Name</label>
+              <input
+                type="text"
+                placeholder="John Doe"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-4 py-2 text-white text-sm placeholder-gray-600 outline-none focus:border-red-500 transition"
+              />
+            </div>
+          )}
 
-        <button
-          onClick={handleSubmit}
-          className="w-full bg-purple-600 text-white py-2 rounded-lg font-medium hover:bg-purple-700 transition"
-        >
-          {isSignUp ? "Create Account" : "Sign In"}
-        </button>
+          <div className="mb-4">
+            <label className="block text-xs text-gray-400 mb-1">Email</label>
+            <input
+              type="email"
+              placeholder="you@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-4 py-2 text-white text-sm placeholder-gray-600 outline-none focus:border-red-500 transition"
+            />
+          </div>
 
-        <p
-          onClick={() => setIsSignUp(!isSignUp)}
-          className="text-center text-sm text-gray-500 mt-4 cursor-pointer hover:text-purple-600"
-        >
-          {isSignUp ? "Already have an account? Sign In" : "New here? Sign Up"}
+          <div className="mb-5">
+            <label className="block text-xs text-gray-400 mb-1">Password</label>
+            <input
+              type="password"
+              placeholder="••••••••"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-4 py-2 text-white text-sm placeholder-gray-600 outline-none focus:border-red-500 transition"
+            />
+          </div>
+
+          {error && (
+            <p className="text-red-400 text-xs mb-4 bg-red-950 border border-red-800 rounded-lg px-3 py-2">
+              {error}
+            </p>
+          )}
+
+          <button
+            onClick={handleSubmit}
+            className="w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg text-sm font-semibold transition"
+          >
+            {isSignUp ? "Create Account" : "Sign In"}
+          </button>
+
+          <p
+            onClick={() => setIsSignUp(!isSignUp)}
+            className="text-center text-sm text-gray-500 mt-5 cursor-pointer hover:text-white transition"
+          >
+            {isSignUp ? "Already have an account? " : "New here? "}
+            <span className="text-red-400 font-medium">
+              {isSignUp ? "Sign In" : "Sign Up"}
+            </span>
+          </p>
+        </div>
+
+        <p className="text-neutral-700 text-xs mt-6 text-center">
+          By continuing, you agree to YouTube's Terms of Service
         </p>
       </div>
     </div>

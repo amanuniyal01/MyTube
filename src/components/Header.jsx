@@ -7,9 +7,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { LANGUAGE_OPTION } from "../utils/constant";
 import { changeLanguage } from "../utils/configSlice";
 import language from "../utils/language";
-import { auth } from "../utils/firebase"; //
-import { signOut } from "firebase/auth"; // 
-import { clearUser } from "../utils/userSlice"; // 
+import { auth } from "../utils/firebase";
+import { signOut } from "firebase/auth";
+import { clearUser } from "../utils/userSlice";
 
 function Header() {
     const [searchQuery, setSearchQuery] = useState("");
@@ -22,16 +22,17 @@ function Header() {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [clickUser, setClickUser] = useState(false)
+    const [clickUser, setClickUser] = useState(false);
 
     const handleSearch = () => {
         if (!searchQuery.trim()) return;
         navigate("/results?q=" + searchQuery);
         setSearchQuery("");
     };
+
     const setSignoutDropDown = () => {
-        setClickUser(!clickUser)
-    }
+        setClickUser(!clickUser);
+    };
 
     const handleKeyDown = (e) => {
         if (e.key === "Enter") {
@@ -42,7 +43,7 @@ function Header() {
     const toggleMenuHandler = () => {
         setTimeout(() => {
             dispatch(toggleMenu());
-        }, 300)
+        }, 300);
     };
 
     useEffect(() => {
@@ -76,55 +77,66 @@ function Header() {
     };
 
     return (
-        <div className="fixed top-0 left-0 w-full z-50 flex justify-between items-center shadow-lg px-2 md:px-4 py-2 bg-white">
+        <div className="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-3 md:px-4 py-2 bg-white border-b border-gray-200 shadow-sm h-14">
 
-            {/* LEFT */}
-            <div className="flex items-center gap-2 md:gap-4 flex-shrink-0">
-                <Menu
+            {/* LEFT — Hamburger + Logo */}
+            <div className="flex items-center gap-1 md:gap-3 flex-shrink-0">
+                <button
                     onClick={toggleMenuHandler}
-                    className="h-5 w-5 md:h-6 md:w-6 cursor-pointer"
-                />
-                <Link to="/">
+                    className="p-2 rounded-full hover:bg-gray-100 transition-colors duration-150"
+                    aria-label="Toggle menu"
+                >
+                    <Menu className="h-5 w-5 text-gray-700" />
+                </button>
+                <Link to="/" className="flex items-center">
                     <img
-                        className="h-6 md:h-10"
-                        alt="Logo"
+                        className="h-5 md:h-[50px]"
+                        alt="YouTube Logo"
                         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgsKZUi9opgiAngq8jEISpzkg5CQCvKPajVn9ZxqcI1ImQE2jU89M5lHTbUEv05ZP0_ns&usqp=CAU"
                     />
                 </Link>
             </div>
 
-            {/* SEARCH */}
-            <div className="relative flex items-center flex-1 mx-2 md:mx-6 max-w-[600px]">
-                <input
-                    className="w-full border-2 border-gray-300 rounded-l-full px-3 md:px-6 py-1.5 md:py-2 outline-none text-gray-800 text-sm md:text-base"
-                    type="text"
-                    placeholder={language[langKey].search}
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    onFocus={() => setShowSuggestions(true)}
-                    onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
-                    onKeyDown={handleKeyDown}
-                />
+            {/* CENTER — Search Bar */}
+            <div className="relative flex items-center flex-1 mx-4 md:mx-8 max-w-[600px]">
+                <div className="flex flex-1 items-center border border-gray-300 rounded-full overflow-visible shadow-inner focus-within:border-blue-500 focus-within:shadow-[0_0_0_1px_#3b82f6] transition-all duration-150">
+                    <input
+                        className="flex-1 px-4 md:px-5 py-2 bg-transparent outline-none text-gray-900 text-sm md:text-[15px] placeholder-gray-400 min-w-0"
+                        type="text"
+                        placeholder={language[langKey]?.search || "Search"}
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        onFocus={() => setShowSuggestions(true)}
+                        onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
+                        onKeyDown={handleKeyDown}
+                    />
+                    <button
+                        onClick={handleSearch}
+                        className="px-4 md:px-5 py-2 bg-gray-100 border-l border-gray-300 hover:bg-gray-200 transition-colors duration-150 rounded-r-full flex items-center justify-center"
+                        aria-label="Search"
+                    >
+                        <Search className="h-5 w-5 text-gray-600" />
+                    </button>
+                </div>
+
                 <button
-                    onClick={handleSearch}
-                    className="px-2 md:px-4 py-1.5 md:py-2 bg-gray-100 border border-gray-300 rounded-r-full hover:bg-gray-200">
-                    <Search className="h-6 w-4 md:h-6 md:w-5" />
-                </button>
-                <button className="ml-2 md:ml-3 p-1.5 md:p-2 bg-gray-100 rounded-full hover:bg-gray-200">
-                    <Mic className="h-4 w-4 md:h-5 md:w-5" />
+                    className="ml-2 md:ml-3 p-2.5 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors duration-150 flex-shrink-0"
+                    aria-label="Voice search"
+                >
+                    <Mic className="h-4 w-4 md:h-5 md:w-5 text-gray-700" />
                 </button>
 
-                {/* Suggestions */}
-                {showSuggestions && (
-                    <div className="absolute top-12 left-0 w-full bg-white rounded-xl shadow-lg border border-gray-200 px-3 md:px-5 py-0 z-50 max-h-72 overflow-y-auto">
-                        <ul className="space-y-2">
-                            {suggestions.map((s, i) => (
+             
+                {showSuggestions && suggestions.length > 0 && (
+                    <div className="absolute top-[calc(100%+6px)] left-0 w-[calc(100%-52px)] bg-white rounded-xl shadow-xl border border-gray-200 py-2 z-50 max-h-72 overflow-y-auto">
+                        <ul>
+                            {suggestions.map((s) => (
                                 <li
                                     key={s}
                                     onMouseDown={() => setSearchQuery(s)}
-                                    className="flex items-center gap-3 hover:bg-gray-100 cursor-pointer px-2 py-1 rounded-md text-sm md:text-base"
+                                    className="flex items-center gap-3 hover:bg-gray-100 cursor-pointer px-4 py-2 text-sm md:text-[14px] text-gray-800 transition-colors duration-100"
                                 >
-                                    <Search className="h-4 w-4 md:h-5 md:w-5 text-gray-500" />
+                                    <Search className="h-4 w-4 text-gray-400 flex-shrink-0" />
                                     <span>{s}</span>
                                 </li>
                             ))}
@@ -133,39 +145,53 @@ function Header() {
                 )}
             </div>
 
-            {/* LANGUAGE */}
-            <div className="relative hidden sm:block">
-                <select
-                    value={langKey}
-                    onChange={(e) => dispatch(changeLanguage(e.target.value))}
-                    className="appearance-none cursor-pointer rounded-full border border-gray-300 bg-white px-3 md:px-4 py-1 text-xs md:text-sm font-medium text-gray-800 hover:bg-gray-100"
+           
+            <div className="flex items-center gap-1 md:gap-2 flex-shrink-0">
+
+                {/* Language Selector */}
+                <div className="hidden sm:block">
+                    <select
+                        value={langKey}
+                        onChange={(e) => dispatch(changeLanguage(e.target.value))}
+                        className="cursor-pointer rounded-full border border-gray-300 bg-white px-3 py-1.5 text-xs md:text-sm font-medium text-gray-700 hover:bg-gray-100 transition-colors duration-150 outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+                    >
+                        {LANGUAGE_OPTION.map((lang) => (
+                            <option key={lang.identifier} value={lang.identifier}>
+                                {lang.name}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+
+                {/* Bell */}
+                <button
+                    className="p-2 rounded-full hover:bg-gray-100 transition-colors duration-150"
+                    aria-label="Notifications"
                 >
-                    {LANGUAGE_OPTION.map((lang) => (
-                        <option key={lang.identifier} value={lang.identifier}>
-                            {lang.name}
-                        </option>
-                    ))}
-                </select>
-            </div>
+                    <Bell className="h-5 w-5 md:h-6 md:w-6 text-gray-700" />
+                </button>
 
-            {/* RIGHT */}
-            <div className="flex items-center gap-2 md:gap-4 flex-shrink-0">
-                <Bell className="h-5 w-5 md:h-6 md:w-6 cursor-pointer" />
-
-
+                {/* User Avatar / Sign In */}
                 {user ? (
-                    <div className="relative group">
-                        {/* First letter avatar */}
-                        <div onClick={setSignoutDropDown} className="h-8 w-8 rounded-full bg-purple-600 text-white flex items-center justify-center font-bold cursor-pointer text-sm">
+                    <div className="relative">
+                        <button
+                            onClick={setSignoutDropDown}
+                            className="h-8 w-8 rounded-full bg-purple-600 hover:bg-purple-700 text-white flex items-center justify-center font-bold text-sm transition-colors duration-150 shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-1"
+                            aria-label="User menu"
+                        >
                             {user.name?.charAt(0).toUpperCase()}
-                        </div>
+                        </button>
 
                         {clickUser && (
-                            <div className="absolute right-0 top-10 bg-white shadow-lg rounded-xl p-3 w-36 z-50 border border-gray-100">
-                                <p className="text-sm font-medium text-gray-800 mb-2">{user.name}</p>
+                            <div className="absolute right-0 top-10 bg-white shadow-xl rounded-xl p-3 w-40 z-50 border border-gray-100 animate-in fade-in slide-in-from-top-1 duration-150">
+                                <p className="text-sm font-semibold text-gray-800 mb-2 truncate">{user.name}</p>
+                                <hr className="border-gray-100 mb-2" />
                                 <button
-                                    onClick={() => { signOut(auth); dispatch(clearUser()); }}
-                                    className="p-2 text-xs text-red-500 hover:text-red-700"
+                                    onClick={() => {
+                                        signOut(auth);
+                                        dispatch(clearUser());
+                                    }}
+                                    className="w-full text-left px-2 py-1.5 text-xs text-red-500 hover:text-red-700 hover:bg-red-50 rounded-lg transition-colors duration-150 font-medium"
                                 >
                                     Sign Out
                                 </button>
@@ -174,7 +200,10 @@ function Header() {
                     </div>
                 ) : (
                     <Link to="/login">
-                        <button className="px-3 py-1.5 bg-red-600 text-white rounded-full text-xs font-medium hover:bg-purple-700">
+                        <button className="flex items-center gap-1.5 px-3 md:px-4 py-1.5 md:py-2 border border-blue-500 text-blue-600 rounded-full text-xs md:text-sm font-semibold hover:bg-blue-50 transition-colors duration-150">
+                            <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z" />
+            </svg>
                             Sign In
                         </button>
                     </Link>
