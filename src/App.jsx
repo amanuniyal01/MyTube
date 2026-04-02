@@ -15,7 +15,10 @@ const App = () => {
   
     {
       path: "/login",
-      element: <Login />
+      element: <>
+      <Header/>
+      <Login/>
+      </>
     },
     {
       path: "/",

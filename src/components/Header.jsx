@@ -7,9 +7,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { LANGUAGE_OPTION } from "../utils/constant";
 import { changeLanguage } from "../utils/configSlice";
 import language from "../utils/language";
-import { auth } from "../utils/firebase"; // 👈 new
-import { signOut } from "firebase/auth"; // 👈 new
-import { clearUser } from "../utils/userSlice"; // 👈 new
+import { auth } from "../utils/firebase"; //
+import { signOut } from "firebase/auth"; // 
+import { clearUser } from "../utils/userSlice"; // 
 
 function Header() {
     const [searchQuery, setSearchQuery] = useState("");
@@ -18,16 +18,20 @@ function Header() {
 
     const searchCache = useSelector((store) => store.search);
     const langKey = useSelector((store) => store.config.lang);
-    const user = useSelector((store) => store.user); // 👈 new
+    const user = useSelector((store) => store.user);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [clickUser, setClickUser] = useState(false)
 
     const handleSearch = () => {
         if (!searchQuery.trim()) return;
         navigate("/results?q=" + searchQuery);
         setSearchQuery("");
     };
+    const setSignoutDropDown = () => {
+        setClickUser(!clickUser)
+    }
 
     const handleKeyDown = (e) => {
         if (e.key === "Enter") {
@@ -148,27 +152,29 @@ function Header() {
             <div className="flex items-center gap-2 md:gap-4 flex-shrink-0">
                 <Bell className="h-5 w-5 md:h-6 md:w-6 cursor-pointer" />
 
-                
+
                 {user ? (
                     <div className="relative group">
                         {/* First letter avatar */}
-                        <div className="h-8 w-8 rounded-full bg-purple-600 text-white flex items-center justify-center font-bold cursor-pointer text-sm">
+                        <div onClick={setSignoutDropDown} className="h-8 w-8 rounded-full bg-purple-600 text-white flex items-center justify-center font-bold cursor-pointer text-sm">
                             {user.name?.charAt(0).toUpperCase()}
                         </div>
-                        {/* Hover dropdown */}
-                        <div className="absolute right-0 top-10 hidden group-hover:block bg-white shadow-lg rounded-xl p-3 w-36 z-50 border border-gray-100">
-                            <p className="text-sm font-medium text-gray-800 mb-2">{user.name}</p>
-                            <button
-                                onClick={() => { signOut(auth); dispatch(clearUser()); }}
-                                className="text-xs text-red-500 hover:text-red-700"
-                            >
-                                Sign Out
-                            </button>
-                        </div>
+
+                        {clickUser && (
+                            <div className="absolute right-0 top-10 bg-white shadow-lg rounded-xl p-3 w-36 z-50 border border-gray-100">
+                                <p className="text-sm font-medium text-gray-800 mb-2">{user.name}</p>
+                                <button
+                                    onClick={() => { signOut(auth); dispatch(clearUser()); }}
+                                    className="p-2 text-xs text-red-500 hover:text-red-700"
+                                >
+                                    Sign Out
+                                </button>
+                            </div>
+                        )}
                     </div>
                 ) : (
                     <Link to="/login">
-                        <button className="px-3 py-1.5 bg-purple-600 text-white rounded-full text-xs font-medium hover:bg-purple-700">
+                        <button className="px-3 py-1.5 bg-red-600 text-white rounded-full text-xs font-medium hover:bg-purple-700">
                             Sign In
                         </button>
                     </Link>
