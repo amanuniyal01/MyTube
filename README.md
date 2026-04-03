@@ -1,128 +1,94 @@
 # 🎬 MyTube
 
-A modern YouTube-inspired web application built using **React, Redux, and Tailwind CSS**, focused on performance, scalability, and clean UI/UX.
+A modern YouTube-inspired web application built using **React**, **Redux**, and **Tailwind CSS** — focused on performance, scalability, and clean UI/UX.
 
 ---
 
 ## 🚀 Features
 
-### ⚡ Debounced Search (Performance Optimized)
+### ⚡ Debounced Search
 
-- Implements **debouncing (200ms)** to reduce unnecessary API calls.
-- Improves performance significantly during fast typing.
+Implements **debouncing (200ms)** to reduce unnecessary API calls and improve performance during fast typing.
 
-#### 🔍 How it works:
+**How it works:**
 
-- If time between keystrokes **< 200ms → API call is skipped**
-- If time **≥ 200ms → API call is triggered**
+- Keystroke gap **< 200ms** → API call is skipped
+- Keystroke gap **≥ 200ms** → API call is triggered
 
-#### 📊 Performance Comparison:
+**Performance comparison:**
 
-| Scenario           | API Calls (per 1000 users) |
-| ------------------ | -------------------------- |
-| Without Debouncing | ~140,000 calls             |
-| With Debouncing    | ~3,000 calls               |
+| Scenario             | API Calls (per 1,000 users) |
+| -------------------- | --------------------------- |
+| Without Debouncing   | ~140,000 calls              |
+| With Debouncing      | ~3,000 calls                |
 
-➡️ This reduces load and improves responsiveness across devices.
+> 98% reduction in API calls — significantly improves responsiveness across devices.
 
 ---
 
 ### 💬 Live Chat (Real-time Simulation)
 
-- Built using **API polling every 500ms**
-- Mimics real-time chat similar to YouTube live streams
-
-#### Features:
+Built using **API polling every 500ms** to mimic real-time chat similar to YouTube live streams.
 
 - Users can send messages
-- Messages are stored in **mock data store**
-- Each message includes:
-  - User name
-  - Profile avatar (first letter in a circle)
-  - Message content
+- Messages are stored in a mock data store
+- Each message shows the user's name, avatar (first letter), and content
 
 ---
 
 ### 🔐 Authentication (Firebase)
 
-- Secure login system powered by **Firebase Authentication**
-- Features:
-  - Login with validation (no invalid credentials allowed)
-  - Logout functionality
-  - Persistent user session
+Secure login powered by **Firebase Authentication**.
 
-#### 👤 User Experience:
-
-- After login, user avatar appears in the UI
-- Avatar shows **first letter of user's name in a styled circle**
+- Login with validation — no invalid credentials allowed
+- Logout functionality
+- Persistent user session
+- After login, user avatar (first letter in a styled circle) appears in the UI
 
 ---
 
 ### 📂 Sidebar Navigation
 
-- Persistent sidebar across pages
-- Includes sections like:
-  - Home
-  - History
-  - Watch Later
-  - Subscriptions
-  - and more...
+Persistent sidebar across all pages with sections like Home, History, Watch Later, Subscriptions, and more.
 
-#### ✨ Functionality:
-
-- Toggle (open/close) sidebar
+- Toggle (open/close) the sidebar
 - Responsive behavior based on user interaction
 
 ---
 
-## 🛠 Tech Stack
+## 🛠️ Tech Stack
 
-- **React.js**
-- **Redux Toolkit**
-- **Tailwind CSS**
-- **Firebase Authentication**
-- **Vite**
-
----
-
-## 📈 Key Highlights
-
-- 🔥 Performance-focused architecture
-- ⚡ Optimized API usage with debouncing
-- 💬 Real-time UI simulation using polling
-- 🎯 Clean and reusable component structure
-- 📱 Responsive design
+| Technology            | Purpose                  |
+| --------------------- | ------------------------ |
+| React.js              | UI Library               |
+| Redux Toolkit         | State Management         |
+| Tailwind CSS          | Styling                  |
+| Firebase              | Authentication           |
+| Vite                  | Build Tool               |
 
 ---
 
 ## 📸 Screenshots
 
-![Home](./src/assets/HomePage.png)
-![LiveChat](./src/assets/LiveChat.png)
-![Login](./src/assets/LoginPage.png)
-![SearchBar](./src/assets/SearchBar.png)
-![Comments](./src/assets/CommentsPage.png)
+| Home | Live Chat |
+|------|-----------|
+| ![Home](./src/assets/HomePage.png) | ![LiveChat](./src/assets/LiveChat.png) |
+
+| Login | Search Bar | Comments |
+|-------|------------|----------|
+| ![Login](./src/assets/LoginPage.png) | ![Search](./src/assets/SearchBar.png) | ![Comments](./src/assets/CommentsPage.png) |
 
 ---
 
-## 🧑‍💻 Author
-
-**Aman Uniyal**
-[LinkedIn](https://www.linkedin.com/in/aman-uniyal-1280b628b)
-
----
-
-## ⭐ Future Improvements
-
-- WebSocket-based real-time chat
-- Dark mode support 🌙
-- Video upload functionality
-- Backend integration (Node.js + DB)
 
 ---
 
 ## 📌 Note
 
-This project is built for learning and demonstration purposes, inspired by YouTube’s UI/UX and core features.
+This project is built for **learning and demonstration purposes**, inspired by YouTube's UI/UX and core features.
 
 ---
+
+## 🧑‍💻 Author
+
+**Aman Uniyal** — [LinkedIn](https://www.linkedin.com/in/aman-uniyal-1280b628b)
