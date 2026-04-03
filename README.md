@@ -100,7 +100,7 @@ A modern YouTube-inspired web application built using **React, Redux, and Tailwi
 
 ## 📸 Screenshots
 
-*(Add your screenshots here for better impact)*
+![Home](./src/assets/HomePage.png)
 
 ---
 
