@@ -8,13 +8,13 @@ A modern YouTube-inspired web application built using **React, Redux, and Tailwi
 
 ### ⚡ Debounced Search (Performance Optimized)
 
-* Implements **debouncing (200ms)** to reduce unnecessary API calls.
-* Improves performance significantly during fast typing.
+- Implements **debouncing (200ms)** to reduce unnecessary API calls.
+- Improves performance significantly during fast typing.
 
 #### 🔍 How it works:
 
-* If time between keystrokes **< 200ms → API call is skipped**
-* If time **≥ 200ms → API call is triggered**
+- If time between keystrokes **< 200ms → API call is skipped**
+- If time **≥ 200ms → API call is triggered**
 
 #### 📊 Performance Comparison:
 
@@ -29,78 +29,79 @@ A modern YouTube-inspired web application built using **React, Redux, and Tailwi
 
 ### 💬 Live Chat (Real-time Simulation)
 
-* Built using **API polling every 500ms**
-* Mimics real-time chat similar to YouTube live streams
+- Built using **API polling every 500ms**
+- Mimics real-time chat similar to YouTube live streams
 
 #### Features:
 
-* Users can send messages
-* Messages are stored in **mock data store**
-* Each message includes:
-
-  * User name
-  * Profile avatar (first letter in a circle)
-  * Message content
+- Users can send messages
+- Messages are stored in **mock data store**
+- Each message includes:
+  - User name
+  - Profile avatar (first letter in a circle)
+  - Message content
 
 ---
 
 ### 🔐 Authentication (Firebase)
 
-* Secure login system powered by **Firebase Authentication**
-* Features:
-
-  * Login with validation (no invalid credentials allowed)
-  * Logout functionality
-  * Persistent user session
+- Secure login system powered by **Firebase Authentication**
+- Features:
+  - Login with validation (no invalid credentials allowed)
+  - Logout functionality
+  - Persistent user session
 
 #### 👤 User Experience:
 
-* After login, user avatar appears in the UI
-* Avatar shows **first letter of user's name in a styled circle**
+- After login, user avatar appears in the UI
+- Avatar shows **first letter of user's name in a styled circle**
 
 ---
 
 ### 📂 Sidebar Navigation
 
-* Persistent sidebar across pages
-* Includes sections like:
-
-  * Home
-  * History
-  * Watch Later
-  * Subscriptions
-  * and more...
+- Persistent sidebar across pages
+- Includes sections like:
+  - Home
+  - History
+  - Watch Later
+  - Subscriptions
+  - and more...
 
 #### ✨ Functionality:
 
-* Toggle (open/close) sidebar
-* Responsive behavior based on user interaction
+- Toggle (open/close) sidebar
+- Responsive behavior based on user interaction
 
 ---
 
 ## 🛠 Tech Stack
 
-* **React.js**
-* **Redux Toolkit**
-* **Tailwind CSS**
-* **Firebase Authentication**
-* **Vite**
+- **React.js**
+- **Redux Toolkit**
+- **Tailwind CSS**
+- **Firebase Authentication**
+- **Vite**
 
 ---
 
 ## 📈 Key Highlights
 
-* 🔥 Performance-focused architecture
-* ⚡ Optimized API usage with debouncing
-* 💬 Real-time UI simulation using polling
-* 🎯 Clean and reusable component structure
-* 📱 Responsive design
+- 🔥 Performance-focused architecture
+- ⚡ Optimized API usage with debouncing
+- 💬 Real-time UI simulation using polling
+- 🎯 Clean and reusable component structure
+- 📱 Responsive design
 
 ---
 
 ## 📸 Screenshots
 
 ![Home](./src/assets/HomePage.png)
+![LiveChat](./src/assets/LiveChat.png)
+![Login](./src/assets/LoginPage.png)
+![SearchBar](./src/assets/SearchBar.png)
+![Comments](./src/assets/CommentsPage.png)
 
 ---
 
@@ -113,10 +114,10 @@ A modern YouTube-inspired web application built using **React, Redux, and Tailwi
 
 ## ⭐ Future Improvements
 
-* WebSocket-based real-time chat
-* Dark mode support 🌙
-* Video upload functionality
-* Backend integration (Node.js + DB)
+- WebSocket-based real-time chat
+- Dark mode support 🌙
+- Video upload functionality
+- Backend integration (Node.js + DB)
 
 ---
 
