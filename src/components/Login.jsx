@@ -35,7 +35,7 @@ function Login() {
   return (
     <div className="flex min-h-screen bg-black">
 
-      {/* LEFT — background image panel, visible only on large screens */}
+    
       <div
         className="hidden lg:flex flex-col justify-end w-1/2 bg-cover bg-center p-12"
         style={{
@@ -52,14 +52,6 @@ function Login() {
       {/* RIGHT — form panel with dark background */}
       <div className="flex flex-1 flex-col items-center justify-center bg-neutral-950 px-6 py-12">
 
-        {/* YouTube logo — inverted to white */}
-        <div className="mb-10">
-          <img
-            className="h-6 brightness-0 invert"
-            alt="YouTube Logo"
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgsKZUi9opgiAngq8jEISpzkg5CQCvKPajVn9ZxqcI1ImQE2jU89M5lHTbUEv05ZP0_ns&usqp=CAU"
-          />
-        </div>
 
         {/* Form card */}
         <div className="w-full max-w-sm bg-neutral-900 border border-neutral-800 rounded-2xl px-8 py-8">
@@ -68,7 +60,7 @@ function Login() {
             {isSignUp ? "Create account" : "Sign in"}
           </h2>
           <p className="text-gray-400 text-sm mb-6">
-            {isSignUp ? "Join YouTube today" : "to continue to YouTube"}
+            {isSignUp ? "Join MyTube today" : "to continue to MyTube"}
           </p>
 
           {isSignUp && (
@@ -88,7 +80,7 @@ function Login() {
             <label className="block text-xs text-gray-400 mb-1">Email</label>
             <input
               type="email"
-              placeholder="you@example.com"
+              placeholder="Enter your email.."
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-4 py-2 text-white text-sm placeholder-gray-600 outline-none focus:border-red-500 transition"
@@ -130,8 +122,8 @@ function Login() {
           </p>
         </div>
 
-        <p className="text-neutral-700 text-xs mt-6 text-center">
-          By continuing, you agree to YouTube's Terms of Service
+        <p className="text-white text-xs mt-6 text-center">
+          By continuing, you agree to MyTube's Terms of Service
         </p>
       </div>
     </div>
