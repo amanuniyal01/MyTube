@@ -15,6 +15,7 @@ function VideoContainer() {
   const videos = useSelector(store => store.videos.videos) || []
   const dispatch = useDispatch()
   const isMenuOpen = useSelector(store => store.app.isMenuOpen);
+  const isDarkMode=useSelector((store)=>store.theme.darkMode)
 
   useEffect(() => {
     getVideos();
@@ -31,7 +32,7 @@ function VideoContainer() {
 
   return (
     <>
-      {loading ? <HomeShimmer /> : <div className={`flex flex-wrap justify-center gap-6 ${isMenuOpen ? "md:ml-60" : "md:ml-20"} mt-16 px-6`}>
+      {loading ? <HomeShimmer /> : <div className={`flex flex-wrap ${isDarkMode?"bg-gray-800":""}  justify-center gap-6 ${isMenuOpen ? "md:ml-60" : "md:ml-20"} mt-16 px-6`}>
         {videos?.map((video) => {
           const isPromoted =
             Number(video?.statistics?.viewCount) > 1000000;
