@@ -10,6 +10,7 @@ import language from "../utils/language";
 import { auth } from "../utils/firebase";
 import { signOut } from "firebase/auth";
 import { clearUser } from "../utils/UserSlice";
+import { toggleTheme } from "../utils/ThemeSlice";
 
 function Header() {
     const [searchQuery, setSearchQuery] = useState("");
@@ -19,6 +20,7 @@ function Header() {
     const searchCache = useSelector((store) => store.search);
     const langKey = useSelector((store) => store.config.lang);
     const user = useSelector((store) => store.user);
+    const theme = useSelector((store) => store.theme.dark)
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -45,7 +47,10 @@ function Header() {
             dispatch(toggleMenu());
         }, 300);
     };
+    const handleDarkMode = () => {
+        dispatch(toggleTheme)
 
+    }
     useEffect(() => {
         if (!searchQuery) {
             setSuggestions([]);
@@ -126,7 +131,7 @@ function Header() {
                     <Mic className="h-4 w-4 md:h-5 md:w-5 text-gray-700" />
                 </button>
 
-             
+
                 {showSuggestions && suggestions.length > 0 && (
                     <div className="absolute top-[calc(100%+6px)] left-0 w-[calc(100%-52px)] bg-white rounded-xl shadow-xl border border-gray-200 py-2 z-50 max-h-72 overflow-y-auto">
                         <ul>
@@ -145,8 +150,12 @@ function Header() {
                 )}
             </div>
 
-           
+
             <div className="flex items-center gap-1 md:gap-2 flex-shrink-0">
+                <button onClick={handleDarkMode} className="">
+                    {theme?"Aman":"anu"}
+
+                </button>
 
                 {/* Language Selector */}
                 <div className="hidden sm:block">
@@ -203,7 +212,7 @@ function Header() {
                         <button className="flex items-center gap-1.5 px-3 md:px-4 py-1.5 md:py-2 border border-blue-500 text-blue-600 rounded-full text-xs md:text-sm font-semibold hover:bg-blue-50 transition-colors duration-150">
                             <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z" />
-            </svg>
+                            </svg>
                             Sign In
                         </button>
                     </Link>

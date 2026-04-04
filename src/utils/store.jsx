@@ -5,6 +5,7 @@ import configReducer from "./configSlice";
 import VideoReducer from "./VideoSlice";
 import ChatSlice from "./ChatSlice";
 import userReducer from "./UserSlice"
+import themeReducer from "./ThemeSlice"
 const store = configureStore({
     reducer: {
         app: appSlice,
@@ -13,6 +14,7 @@ const store = configureStore({
         videos: VideoReducer,
         chat: ChatSlice,
         user: userReducer,
+        theme: themeReducer
     }
 
 })
