@@ -11,6 +11,7 @@ import { auth } from "../utils/firebase";
 import { signOut } from "firebase/auth";
 import { clearUser } from "../utils/UserSlice";
 import { toggleTheme } from "../utils/ThemeSlice";
+import logo from "../images/myTube-logo.png"
 
 function Header() {
     const [searchQuery, setSearchQuery] = useState("");
@@ -82,7 +83,7 @@ function Header() {
     };
 
     return (
-        <div className={`fixed top-0 left-0 w-full z-50 flex justify-between items-center px-3 md:px-4 py-2 ${isDarkMode ? "bg-black" : "bg-white"} border-b border-gray-200 shadow-sm h-14`}>
+        <div className={`fixed top-0 left-0 w-full z-50 flex justify-between items-center px-3 md:px-4 py-2 ${isDarkMode ? "bg-gray-800" : "bg-white"} border-b border-gray-200 shadow-sm h-14`}>
 
             {/* LEFT — Hamburger + Logo */}
             <div className="flex items-center gap-1 md:gap-3 flex-shrink-0">
@@ -95,9 +96,9 @@ function Header() {
                 </button>
                 <Link to="/" className="flex items-center">
                     <img
-                        className={`h-5 md:h-[50px] ${isDarkMode ? "invert brightness-400" : ""}`}
+                        className={`h-5 md:h-[50px] ${isDarkMode ? "bg-gray-800 text-white" : ""}`}
                         alt="MyTube Logo"
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgsKZUi9opgiAngq8jEISpzkg5CQCvKPajVn9ZxqcI1ImQE2jU89M5lHTbUEv05ZP0_ns&usqp=CAU"
+                        src={logo}
                     />
                 </Link>
             </div>
