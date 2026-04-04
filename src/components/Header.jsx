@@ -9,7 +9,7 @@ import { changeLanguage } from "../utils/configSlice";
 import language from "../utils/language";
 import { auth } from "../utils/firebase";
 import { signOut } from "firebase/auth";
-import { clearUser } from "../utils/userSlice";
+import { clearUser } from "../utils/UserSlice";
 
 function Header() {
     const [searchQuery, setSearchQuery] = useState("");

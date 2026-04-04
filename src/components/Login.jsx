@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { auth } from "../utils/firebase";
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useDispatch } from "react-redux";
-import { setUser } from "../utils/userSlice";
+import { setUser } from "../utils/UserSlice";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
