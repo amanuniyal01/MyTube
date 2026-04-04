@@ -20,7 +20,7 @@ function Header() {
     const searchCache = useSelector((store) => store.search);
     const langKey = useSelector((store) => store.config.lang);
     const user = useSelector((store) => store.user);
-    const isdarkMode = useSelector((store) => store.theme.darkMode)
+    const isDarkMode = useSelector((store) => store.theme.darkMode)
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -154,13 +154,13 @@ function Header() {
             <div className="flex items-center gap-1 md:gap-2 flex-shrink-0">
                 <button
                     onClick={handleDarkMode}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs font-semibold transition-colors duration-200 ${isdarkMode
-                            ? "bg-gray-800 border-gray-600 text-yellow-300 hover:bg-gray-700"
-                            : "bg-gray-100 border-gray-300 text-gray-700 hover:bg-gray-200"
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs font-semibold transition-colors duration-200 ${isDarkMode
+                        ? "bg-gray-800 border-gray-600 text-yellow-300 hover:bg-gray-700"
+                        : "bg-gray-100 border-gray-300 text-gray-700 hover:bg-gray-200"
                         }`}
                 >
-                    <span className="text-sm">{isdarkMode ? "🌙" : "☀️"}</span>
-                    <span>{isdarkMode ? "Dark" : "Light"}</span>
+                    <span className="text-sm">{isDarkMode ? "🌙" : "☀️"}</span>
+                    <span>{isDarkMode ? "Dark" : "Light"}</span>
                 </button>
 
                 {/* Language Selector */}

@@ -25,14 +25,28 @@ import { useState } from "react";
 import language from "../utils/language";
 
 const SidebarItem = ({ icon: Icon, label, to, badge }) => {
+  const isDarkMode = useSelector((store) => store.theme.darkMode);
+
   const item = (
-    <li className="flex items-center gap-5 px-3 py-2 mx-2 text-sm font-medium text-gray-900 rounded-lg cursor-pointer hover:bg-gray-100">
+    <li
+      className={`flex items-center gap-5 px-3 py-2 mx-2 text-sm font-medium rounded-lg cursor-pointer
+      ${
+        isDarkMode
+          ? "text-white hover:bg-gray-800"
+          : "text-gray-900 hover:bg-gray-100"
+      }`}
+    >
       <div className="flex items-center justify-center w-6 h-6 shrink-0">
         <Icon className="w-5 h-5" />
       </div>
+
       <span className="flex-1 text-[13.5px] truncate">{label}</span>
+
       {badge && (
-        <span className="px-1.5 py-[2px] text-[10px] font-bold text-white bg-black rounded">
+        <span
+          className={`px-1.5 py-[2px] text-[10px] font-bold rounded
+          ${isDarkMode ? "bg-white text-black" : "bg-black text-white"}`}
+        >
           {badge}
         </span>
       )}
@@ -42,38 +56,56 @@ const SidebarItem = ({ icon: Icon, label, to, badge }) => {
   return to ? <Link to={to}>{item}</Link> : item;
 };
 
-const SectionTitle = ({ title }) => (
-  <p className="px-5 pt-2 pb-1 text-xs font-semibold tracking-wide text-gray-500 uppercase">
-    {title}
-  </p>
-);
+const SectionTitle = ({ title }) => {
+  const isDarkMode = useSelector((store) => store.theme.darkMode);
 
-const SubscriptionItem = ({ name, avatar, isLive }) => (
-  <li className="flex items-center gap-5 px-3 py-2 mx-2 text-sm font-medium text-gray-900 rounded-lg cursor-pointer hover:bg-gray-100">
-    <div className="relative w-6 h-6 shrink-0">
-      {avatar ? (
-        <img
-          src={avatar}
-          alt={name}
-          className="object-cover w-6 h-6 rounded-full"
-        />
-      ) : (
-        <div className="flex items-center justify-center w-6 h-6 text-[11px] font-bold text-white rounded-full bg-gradient-to-br from-red-400 to-red-600">
-          {name.charAt(0).toUpperCase()}
-        </div>
-      )}
+  return (
+    <p
+      className={`px-5 pt-2 pb-1 text-xs font-semibold tracking-wide uppercase
+      ${isDarkMode ? "text-gray-400" : "text-gray-500"}`}
+    >
+      {title}
+    </p>
+  );
+};
+
+const SubscriptionItem = ({ name, avatar, isLive }) => {
+  const isDarkMode = useSelector((store) => store.theme.darkMode);
+
+  return (
+    <li
+      className={`flex items-center gap-5 px-3 py-2 mx-2 text-sm font-medium rounded-lg cursor-pointer
+      ${
+        isDarkMode
+          ? "text-white hover:bg-gray-800"
+          : "text-gray-900 hover:bg-gray-100"
+      }`}
+    >
+      <div className="relative w-6 h-6 shrink-0">
+        {avatar ? (
+          <img
+            src={avatar}
+            alt={name}
+            className="object-cover w-6 h-6 rounded-full"
+          />
+        ) : (
+          <div className="flex items-center justify-center w-6 h-6 text-[11px] font-bold text-white rounded-full bg-gradient-to-br from-red-400 to-red-600">
+            {name.charAt(0).toUpperCase()}
+          </div>
+        )}
+        {isLive && (
+          <span className="absolute bottom-0 right-0 w-2 h-2 bg-red-600 border border-white rounded-full"></span>
+        )}
+      </div>
+
+      <span className="flex-1 text-[13.5px] truncate">{name}</span>
+
       {isLive && (
-        <span className="absolute bottom-0 right-0 w-2 h-2 bg-red-600 border border-white rounded-full"></span>
+        <span className="text-[10px] font-bold text-red-600">LIVE</span>
       )}
-    </div>
-
-    <span className="flex-1 text-[13.5px] truncate">{name}</span>
-
-    {isLive && (
-      <span className="text-[10px] font-bold text-red-600">LIVE</span>
-    )}
-  </li>
-);
+    </li>
+  );
+};
 
 const mockSubscriptions = [
   { name: "Fireship", isLive: false },
@@ -87,6 +119,8 @@ const mockSubscriptions = [
 const Sidebar = () => {
   const langKey = useSelector((store) => store.config.lang);
   const isMenuOpen = useSelector((store) => store.app.isMenuOpen);
+  const isDarkMode = useSelector((store) => store.theme.darkMode);
+
   const [showAllSubs, setShowAllSubs] = useState(false);
 
   const visibleSubs = showAllSubs
@@ -96,20 +130,25 @@ const Sidebar = () => {
   if (!isMenuOpen) return null;
 
   return (
-    <div className="fixed top-14 left-0 z-30 w-60 h-[calc(100vh-56px)] bg-white border-r overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300">
-      
-      {/* Main Nav */}
-      <ul className="p-0 m-0 list-none">
+    <div
+      className={`fixed top-14 left-0 z-30 w-60 h-[calc(100vh-56px)]
+      ${
+        isDarkMode
+          ? "bg-black text-white border-gray-800"
+          : "bg-white text-black border-gray-200"
+      }
+      border-r overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300`}
+    >
+      <ul>
         <SidebarItem icon={Home} label={language[langKey]?.Home || "Home"} to="/" />
         <SidebarItem icon={Flame} label={language[langKey]?.Shorts || "Shorts"} />
         <SidebarItem icon={PlaySquare} label={language[langKey]?.Subscriptions || "Subscriptions"} />
       </ul>
 
-      <hr className="my-2 border-gray-200" />
+      <hr className={`my-2 ${isDarkMode ? "border-gray-800" : "border-gray-200"}`} />
 
-      {/* You */}
       <SectionTitle title="You" />
-      <ul className="p-0 m-0 list-none">
+      <ul>
         <SidebarItem icon={History} label="History" />
         <SidebarItem icon={Video} label="Your videos" />
         <SidebarItem icon={Clock} label="Watch later" />
@@ -118,11 +157,10 @@ const Sidebar = () => {
         <SidebarItem icon={Bell} label="Notifications" badge="3" />
       </ul>
 
-      <hr className="my-2 border-gray-200" />
+      <hr className={`my-2 ${isDarkMode ? "border-gray-800" : "border-gray-200"}`} />
 
-      {/* Subscriptions */}
       <SectionTitle title="Subscriptions" />
-      <ul className="p-0 m-0 list-none">
+      <ul>
         {visibleSubs.map((sub) => (
           <SubscriptionItem key={sub.name} {...sub} />
         ))}
@@ -130,7 +168,12 @@ const Sidebar = () => {
 
       <button
         onClick={() => setShowAllSubs((p) => !p)}
-        className="flex items-center gap-5 w-[calc(100%-16px)] mx-2 px-3 py-2 text-sm font-medium rounded-lg hover:bg-gray-100"
+        className={`flex items-center gap-5 w-[calc(100%-16px)] mx-2 px-3 py-2 text-sm font-medium rounded-lg
+        ${
+          isDarkMode
+            ? "text-white hover:bg-gray-800"
+            : "hover:bg-gray-100"
+        }`}
       >
         {showAllSubs ? (
           <ChevronUp className="w-5 h-5" />
@@ -140,11 +183,10 @@ const Sidebar = () => {
         {showAllSubs ? "Show less" : `Show ${mockSubscriptions.length - 4} more`}
       </button>
 
-      <hr className="my-2 border-gray-200" />
+      <hr className={`my-2 ${isDarkMode ? "border-gray-800" : "border-gray-200"}`} />
 
-      {/* Explore */}
       <SectionTitle title="Explore" />
-      <ul className="p-0 m-0 list-none">
+      <ul>
         <SidebarItem icon={Flame} label="Trending" />
         <SidebarItem icon={Music2} label="Music" />
         <SidebarItem icon={Gamepad2} label="Gaming" />
@@ -153,21 +195,26 @@ const Sidebar = () => {
         <SidebarItem icon={Lightbulb} label="Learning" />
       </ul>
 
-      <hr className="my-2 border-gray-200" />
+      <hr className={`my-2 ${isDarkMode ? "border-gray-800" : "border-gray-200"}`} />
 
-      {/* Settings */}
-      <ul className="p-0 m-0 list-none">
+      <ul>
         <SidebarItem icon={Settings} label="Settings" />
         <SidebarItem icon={HelpCircle} label="Help" />
         <SidebarItem icon={Flag} label="Send feedback" />
       </ul>
 
-      <hr className="my-2 border-gray-200" />
+      <hr className={`my-2 ${isDarkMode ? "border-gray-800" : "border-gray-200"}`} />
 
-      {/* Footer */}
-      <div className="flex flex-wrap gap-x-2 gap-y-1 px-5 py-2 text-xs text-gray-500">
-        {["About","Press","Copyright","Contact","Creators","Advertise","Developers"].map((link) => (
-          <a key={link} href="#" className="hover:text-black">
+      <div
+        className={`flex flex-wrap gap-x-2 gap-y-1 px-5 py-2 text-xs
+        ${isDarkMode ? "text-gray-400" : "text-gray-500"}`}
+      >
+        {["About", "Press", "Copyright", "Contact", "Creators", "Advertise", "Developers"].map((link) => (
+          <a
+            key={link}
+            href="#"
+            className={`${isDarkMode ? "hover:text-white" : "hover:text-black"}`}
+          >
             {link}
           </a>
         ))}
