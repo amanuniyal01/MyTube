@@ -8,7 +8,7 @@ function ButtonList() {
   const isMenuOpen = useSelector(store => store.app.isMenuOpen);
 
   return (
-    <div className={`flex mt-20   overflow-x-auto ${isMenuOpen?"ml-60":"ml-10"} whitespace-nowrap p-2 bg-white scrollbar-hide`}>
+    <div className={`flex mt-20   overflow-x-auto ${isMenuOpen?"ml-65":"ml-10"} whitespace-nowrap p-2 bg-white scrollbar-hide`}>
       {categories.map((name, index) => (
         <Button key={index} name={name} />
       ))}
