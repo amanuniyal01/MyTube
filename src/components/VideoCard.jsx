@@ -11,7 +11,7 @@ function VideoCard({ info }) {
 
   return (
     <div
-      className={`group w-72  ${isDarkMode?"bg-gray-800":"bg-white"} border-b-0 rounded-2xl  hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-[1.02] overflow-hidden cursor-pointer`}
+      className={`group w-72 ${isDarkMode ? "bg-gray-700" : "bg-white"} border-b-0 rounded-2xl hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-[1.02] overflow-hidden cursor-pointer`}
     >
       <div className="relative">
         <img
@@ -19,16 +19,17 @@ function VideoCard({ info }) {
           src={thumbnails?.medium?.url}
           alt={title}
         />
-
         <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
       </div>
 
       <div className="p-3">
-        <h3 className="text-sm font-semibold line-clamp-2 group-hover:text-red-500 transition-colors text-black duration-300">
+        <h3 className={`text-sm font-semibold line-clamp-2 group-hover:text-red-500 transition-colors duration-300 ${isDarkMode ? "text-white" : "text-black"}`}>
           {title}
         </h3>
-        <p className="text-black text-xs font-semibold mt-1">{channelTitle}</p>
-        <p className="text-black text-xs mt-1">
+        <p className={`text-xs font-semibold mt-1 ${isDarkMode ? "text-gray-300" : "text-black"}`}>
+          {channelTitle}
+        </p>
+        <p className={`text-xs mt-1 ${isDarkMode ? "text-gray-400" : "text-black"}`}>
           {Number(statistics?.viewCount).toLocaleString()} views
         </p>
       </div>
