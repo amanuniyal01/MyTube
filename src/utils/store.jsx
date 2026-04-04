@@ -4,7 +4,7 @@ import SearchSlice from "./SearchSlice"
 import configReducer from "./configSlice";
 import VideoReducer from "./VideoSlice";
 import ChatSlice from "./ChatSlice";
-import userReducer from "./userSlice"
+import userReducer from "./UserSlice"
 const store = configureStore({
     reducer: {
         app: appSlice,
