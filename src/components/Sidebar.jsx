@@ -134,7 +134,7 @@ const Sidebar = () => {
       className={`fixed top-14 left-0 z-30 w-60 h-[calc(100vh-56px)]
       ${
         isDarkMode
-          ? "bg-black text-white border-gray-800"
+          ? "bg-gray-800 text-white border-gray-800"
           : "bg-white text-black border-gray-200"
       }
       border-r overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300`}
@@ -145,7 +145,7 @@ const Sidebar = () => {
         <SidebarItem icon={PlaySquare} label={language[langKey]?.Subscriptions || "Subscriptions"} />
       </ul>
 
-      <hr className={`my-2 ${isDarkMode ? "border-gray-800" : "border-gray-200"}`} />
+      <hr className={`my-2 ${isDarkMode ? "border-gray-200" : "border-gray-400"}`} />
 
       <SectionTitle title="You" />
       <ul>
@@ -157,7 +157,7 @@ const Sidebar = () => {
         <SidebarItem icon={Bell} label="Notifications" badge="3" />
       </ul>
 
-      <hr className={`my-2 ${isDarkMode ? "border-gray-800" : "border-gray-200"}`} />
+      <hr className={`my-2 ${isDarkMode ? "border-gray-200" : "border-gray-400"}`} />
 
       <SectionTitle title="Subscriptions" />
       <ul>

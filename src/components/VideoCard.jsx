@@ -7,10 +7,11 @@ function VideoCard({ info }) {
   const { snippet, statistics } = info
   const { channelTitle, title, thumbnails } = snippet
   const isMenuOpen = useSelector(store => store.app.isMenuOpen);
+  const isDarkMode = useSelector((store) => store.theme.darkMode)
 
   return (
     <div
-      className="group w-72 bg-white dark:bg-gray-900 border-b-0 rounded-2xl  hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-[1.02] overflow-hidden cursor-pointer"
+      className={`group w-72  ${isDarkMode?"bg-gray-800":"bg-white"} border-b-0 rounded-2xl  hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-[1.02] overflow-hidden cursor-pointer`}
     >
       <div className="relative">
         <img
