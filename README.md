@@ -56,6 +56,12 @@ Persistent sidebar across all pages with sections like Home, History, Watch Late
 
 ---
 
+### 🌃 Dark/Light Mode
+
+User have a option to change the theme of whole website according to its comfort..
+  - Toggle Light/ Dark Mode.
+  - For Each component Dark Mode is Available..
+
 ## 🛠️ Tech Stack
 
 | Technology            | Purpose                  |
