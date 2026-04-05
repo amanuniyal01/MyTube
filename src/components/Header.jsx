@@ -107,7 +107,7 @@ function Header() {
             <div className="relative flex items-center flex-1 mx-4 md:mx-8 max-w-[600px]">
                 <div className="flex flex-1 items-center border border-gray-300 rounded-full overflow-visible shadow-inner focus-within:border-blue-500 focus-within:shadow-[0_0_0_1px_#3b82f6] transition-all duration-150">
                     <input
-                        className="flex-1 px-4 md:px-5 py-2 bg-transparent outline-none text-gray-900 text-sm md:text-[15px] placeholder-gray-400 min-w-0"
+                        className={`flex-1 px-4 md:px-5 py-2 bg-transparent outline-none ${isDarkMode?"text-white placeholder-white":" text-gray-900 placeholder-gray-400"}  text-sm md:text-[15px]  min-w-0`}
                         type="text"
                         placeholder={language[langKey]?.search || "Search"}
                         value={searchQuery}
