@@ -134,7 +134,7 @@ function Header() {
 
 
                 {showSuggestions && suggestions.length > 0 && (
-                    <div className="absolute top-[calc(100%+6px)] left-0 w-[calc(100%-52px)] bg-white rounded-xl shadow-xl border border-gray-200 py-2 z-50 max-h-72 overflow-y-auto">
+                    <div className={`absolute top-[calc(100%+6px)] left-0 w-[calc(100%-52px)] ${isDarkMode?"bg-gray-300":"bg-white"} rounded-xl shadow-xl border border-gray-200 py-2 z-50 max-h-72 overflow-y-auto`}>
                         <ul>
                             {suggestions.map((s) => (
                                 <li

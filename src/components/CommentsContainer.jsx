@@ -1,5 +1,6 @@
 import React from 'react'
 import Comment from './Comment'
+import { useSelector } from 'react-redux';
 const commentData = [
   {
     Name: "Rahul Sharma",
@@ -299,32 +300,33 @@ const commentData = [
 
 
 const CommentsList = ({ comments }) => {
-    return (
-        <div>
-            {comments.map((comment, index) => {
-                return (
-                    <div key={index}>
-                        <Comment  data={comment} />
-                        <div className='ml-14 border-l-2 border-l-black/85'>
-                         <CommentsList comments={comment.replies}/>
+  return (
+    <div>
+      {comments.map((comment, index) => {
+        return (
+          <div key={index}>
+            <Comment data={comment} />
+            <div className='ml-14 border-l-2 border-l-black/85'>
+              <CommentsList comments={comment.replies} />
 
 
-                        </div>
-                    </div>
-                )
-                    ;
-            })}
-        </div>
-    );
+            </div>
+          </div>
+        )
+          ;
+      })}
+    </div>
+  );
 };
 function CommentsContainer() {
-    return (
-        <div>
+  const isDarkMode = useSelector((store) => store.theme.darkMode)
+  return (
+    <div className={`${isDarkMode ? "bg-gray-800" : ""}`}>
 
-            <h1 className='text-2xl font-bold mt-5'>Comments</h1>
-            <CommentsList comments={commentData} />
-        </div>
-    )
+      <h1 className={`text-2xl ${isDarkMode?"text-white":""} font-bold mt-14`}>Comments</h1>
+      <CommentsList comments={commentData} />
+    </div>
+  )
 }
 
 export default CommentsContainer
