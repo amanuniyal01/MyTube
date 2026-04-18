@@ -323,7 +323,7 @@ function CommentsContainer() {
   return (
     <div className={`${isDarkMode ? "bg-gray-800" : ""}`}>
 
-      <h1 className={`text-2xl ${isDarkMode?"text-white":""} font-bold mt-14`}>Comments</h1>
+      <h1 className={`text-2xl ${isDarkMode?"text-white":""} font-bold mt-14`}>{commentData.length} Comments</h1>
       <CommentsList comments={commentData} />
     </div>
   )

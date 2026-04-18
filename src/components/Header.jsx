@@ -196,7 +196,7 @@ function Header() {
             <span className="hidden sm:inline">{dark ? "Dark" : "Light"}</span>
           </button>
 
-          {/* Language selector — hidden on xs, visible sm+ */}
+       
           <select
             value={langKey}
             onChange={(e) => dispatch(changeLanguage(e.target.value))}

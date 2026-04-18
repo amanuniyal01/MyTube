@@ -5,11 +5,13 @@ import { useSearchParams } from "react-router-dom";
 import RecommendedVideos from "./RecommendedVideos";
 import CommentsContainer from "./CommentsContainer";
 import LiveChat from "./LiveChat";
+import { Download, Save, Share, Share2, ThumbsDown, ThumbsUp } from "lucide-react";
+import LikeDislike from "./LikeDislike";
 
 function WatchPage() {
   const [searchParams] = useSearchParams();
   const videoId = searchParams.get("v");
-  const isDarkMode=useSelector((store)=>store.theme.darkMode);
+  const isDarkMode = useSelector((store) => store.theme.darkMode);
 
   const dispatch = useDispatch();
 
@@ -18,7 +20,7 @@ function WatchPage() {
   }, [dispatch]);
 
   return (
-    <div className={`grid ${isDarkMode?"bg-gray-800":"bg-white"}  w-full grid-cols-12 mt-28 px-3 md:px-8 gap-6`}>
+    <div className={`grid ${isDarkMode ? "bg-gray-800" : "bg-white"}  w-full grid-cols-12 mt-28 px-3 md:px-8 gap-6`}>
 
       <div className=" col-span-12 md:col-span-9">
         <iframe
@@ -28,6 +30,13 @@ function WatchPage() {
           frameBorder="0"
           allowFullScreen
         />
+        <div className="flex items-center justify-between m-5">
+
+
+
+
+        </div>
+        <LikeDislike />
         <CommentsContainer />
       </div>
 
